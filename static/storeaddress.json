@@ -32,5 +32,11 @@
     "address":"1701-A, 17th Floor, The Capital Building, B – Wing, Opp. Icici Bank, Bandra Kurla Complex",
     "mobile_number":"9156121089"
   }
-
+ {
+    "id": 6,
+    "store_name":"Default Store",
+    "address":"1702-A, 17th Floor, The Capital Building, B – Wing, Opp. Icici Bank, Bandra Kurla Complex",
+    "mobile_number":"9156121089"
+  }
 ]
+
