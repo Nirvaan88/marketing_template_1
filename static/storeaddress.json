@@ -3,7 +3,8 @@
     "id": 1,
     "store_name": "Default Store",
     "address":"1701-B, 17th Floor,The Capital Building, B Wing, Opp. ICICI Bank, BKC, Mumbai, Maharashtra - 400051",
-    "mobile_number":"9876543210"
+    "mobile_number": "9876543210",
+    "image": "./static/images/contact-logo.svg"
 
   },
   {
