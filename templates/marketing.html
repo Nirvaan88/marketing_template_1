@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
+<!DOCTYPE html>  
+<html>  
+ <head>
   <title>Marketing Template Editor</title>
   <style>
     body {
@@ -21,384 +21,839 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
     .template-box {
-      width: 794px;
-      height: 1123px;
+      width: 794px;             /* Fixed A4 width */
+      height: 1123px;           /* Fixed A4 height */
       border: 2px dashed #aaa;
       background-color: transparent;
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
       position: relative;
-      overflow: hidden;
+      overflow: hidden;         /* Disable scrolling */
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       margin: 0 auto;
     }
-    .draggable { position: absolute; cursor: move; }
-    .thumbnail-slider { display: flex; gap: 10px; overflow-x: auto; margin-top: 10px; padding-bottom: 30px; }
-    .thumbnail-slider img { width: 100px; height: 100px; object-fit: cover; border: 2px solid transparent; cursor: pointer; }
-    .thumbnail-slider img:hover { border-color: #007bff; }
-
-    #storeFooterName {
+    .draggable {
       position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-57%);
-      text-align: center;
-      font-size: 12px;
-      color: #000;
-      white-space: nowrap;
-      transition: bottom 0.3s ease;
+      cursor: move;
     }
-    .store-address { display: inline-block; color: #000; font-weight: bold; font-size: 14px; margin-left: -20px; margin-right: 2px; }
-    .separator { font-weight: bold; font-size: 20px; margin: 0 2px; line-height: 1; }
-    .contact-logo {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 6px;
+    .thumbnail-slider {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      margin-top: 10px;
+      padding-bottom: 30px;
     }
-    .contact-logo svg { width: 100%; height: 100%; display: block; }
-    .contact-icon { width: 40px; height: 40px; background-color: black; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-    .contact-icon i { color: white; font-size: 20px; }
-  </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    .thumbnail-slider img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+    .thumbnail-slider img:hover {
+      border-color: #007bff;
+     }
+
+
+  .contact-icon svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  vertical-align: middle;
+}
+#storeFooterName {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-57%);
+    text-align: center;
+    font-size: 12px;
+    color: #000;
+    white-space: nowrap;
+    transition: bottom 0.3s ease;
+  }
+ .store-address {
+    display: inline-block;
+    color: #000;
+    font-weight: 700; 
+    font-weight: bold; 
+    font-size: 14px; 
+    margin-left: -4px;
+    margin-right: 2px; 
+    margin-left: -20px;
+    /* You can also set a default font size here if desired */
+  }
+.separator {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0 2px;     /* minimal space around | */
+    line-height: 1;
+}
+/* ✅ Contact logo mask (so it can be colored) */ 
+.contact-logo { display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-color: #faf6f600; /* default */
+  /* -webkit-mask: url("/static/images/contact-logo.jpg") no-repeat center; 
+ -webkit-mask-size: contain;
+  mask: url("/static/images/contact-logo.jpg") no-repeat center;  */
+  mask-size: contain; 
+  margin-right: 2px;
+  vertical-align: middle;
+  margin-left: 2px; }
+ #storeFooterName {
+    text-align: left;
+  }
+  /* .contact-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #d4b68c00; /* light brown tone */
+  /* display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+  border: 1px solid #b9986a;
+}  */ */
+/* .contact-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+} */
+.black-filled {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #000; /* solid black circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.black-filled i {
+  color: #fff; /* white phone icon */
+  font-size: 18px;
+}
+#storeFooterName {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-57%);
+  text-align: center;
+  transition: bottom 0.3s ease; /* smooth upward motion */
+}
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+    background-color: black; /* black background */
+    border-radius: 50%; /* circular shape */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contact-icon i {
+    color: white; /* white handset */
+    font-size: 20px;
+  }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 </head>
 <body>
+  <h1>Marketing Template Editor</h1>
+  <div class="controls">
+    <div>
+      <label>Upload Background Image:</label>
+      <input type="file" id="bgUpload" accept="image/*">
+    </div>
+   
+<div>
+      <label>Choose Background Color:</label>
+      <input type="color" id="bgColor">
+      <button onclick="applyColor()">Apply Color</button>
+    </div>
+    <div class="contact-logo-container">
+    
+  <div class="contact-circle">
+  <p>logo</p>
+    <i class="fa fa-phone"></i>
+  </div>
+  <span class="contact-text">Contact</span>
+</div>
 
-<h1>Marketing Template Editor</h1>
-<div class="controls">
-  <div>
-    <label>Upload Background Image:</label>
-    <input type="file" id="bgUpload" accept="image/*">
+   <div>
+      <label>Upload Logo:</label>
+      <input type="file" id="logoUpload" accept="image/*">
   </div>
+    <div>
+   <label>Combined Color:</label>
+   <input type="color" id="combinedColor" value="#000000">
+   <button type="button" onclick="applyCombinedColor()">Apply Combined Color</button>
+</div>
   <div>
-    <label>Choose Background Color:</label>
-    <input type="color" id="bgColor">
-    <button onclick="applyColor()">Apply Color</button>
-  </div>
+  <label>Contact Logo Color:</label>
+  <input type="color" id="contactLogoColor" value="#000000">
+  <label>Store Name Color:</label>
+  <input type="color" id="storeNameColor" value="#000000">
+  <button type="button" onclick="applyColors()">Apply Colors</button>
+  <button onclick="downloadEachTemplateA4()">Download All Templates (Separate PDFs)</button>
+
+ </div>
+
   <div>
-    <label>Upload Logo:</label>
-    <input type="file" id="logoUpload" accept="image/*">
-  </div>
-  <div>
-    <label>Combined Color:</label>
-    <input type="color" id="combinedColor" value="#000000">
-    <button type="button" onclick="applyCombinedColor()">Apply Combined Color</button>
-  </div>
-  <div>
-    <label>Contact Logo Color:</label>
-    <input type="color" id="contactLogoColor" value="#000000">
-    <label>Store Name Color:</label>
-    <input type="color" id="storeNameColor" value="#000000">
-    <button type="button" onclick="applyColors()">Apply Colors</button>
-    <button onclick="downloadEachTemplateA4()">Download All Templates (Separate PDFs)</button>
-  </div>
-  <div>
-    <label>Add Footer Text:</label>
-    <input type="text" id="footerName" placeholder="Store Name">
-    <label>WhatsApp Number:</label>
-    <input type="text" id="footerWhatsApp" placeholder="WhatsApp Number">
-    <button type="button" onclick="updateFooterInfo()">Update Footer Text & WhatsApp</button>
-  </div>
-  <div>
-    <button onclick="downloadPNG()">Download PNG</button>
-    <button onclick="downloadPDF()">Download (A4)</button>
+  <label>Add Footer Text:</label>
+  <input type="text" id="footerName" placeholder="Store Name">
+
+  <label>WhatsApp Number:</label>
+  <input type="text" id="footerWhatsApp" placeholder="WhatsApp Number">
+
+  <button type="button" onclick="updateFooterInfo()">Update Footer Text & WhatsApp</button>
+</div>
+<div>
+      <button onclick="downloadPNG()">Download PNG</button>
+      <button onclick="downloadPDF()">Download (A4)</button>
+    </div>
+    <div style="margin-top:15px;">
     <button onclick="downloadTemplate('templateBox', 'png')">Download Template as PNG</button>
     <button onclick="downloadTemplate('templateBox', 'pdf')">Download Template as PDF</button>
   </div>
-  <div style="margin: 20px 0; width:100%; max-width:1200px; background:#fff; padding:15px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+   <div style="margin: 20px 0; width:100%; max-width:1200px; background:#fff; padding:15px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
     <label>Upload Custom Template:</label>
     <input type="file" id="templateUpload" accept="image/*">
   </div>
+  <div id="templateBox" class="template-box">
+    <!-- Default store name + footer -->
+    <p id="storeFooterName">Default Store Name</p>
+    
+
+    <div id="storeFooter"></div>
+  </div>
+
+
+<div id="anotherTemplateContainer" class="another-template">
 </div>
 
-<div id="templateBox" class="template-box">
-  <p id="storeFooterName">Default Store Name</p>
-  <div id="storeFooter"></div>
-</div>
+  <!-- Third template area -->
+  <div id="templatesContainer" style="margin-top:10px;"></div>
 
-<div id="templatesContainer" style="margin-top:10px;"></div>
-<h2>Templates</h2>
-<div class="thumbnail-slider" id="templateSlider"></div>
-<h2>Products</h2>
-<div class="thumbnail-slider" id="productSlider"></div>
-<h2>Banners</h2>
-<div class="thumbnail-slider" id="bannerSlider"></div>
 
-<script>
-const templateBox = document.getElementById("templateBox");
-const templateSlider = document.getElementById("templateSlider");
+  <h2>Templates</h2>
+  <div class="thumbnail-slider" id="templateSlider"></div>
 
-function makeDraggable(el) {
-  el.onmousedown = function(e) {
-    e.preventDefault();
-    let shiftX = e.clientX - el.getBoundingClientRect().left;
-    let shiftY = e.clientY - el.getBoundingClientRect().top;
-    function moveAt(pageX, pageY) {
-      el.style.left = pageX - shiftX - templateBox.getBoundingClientRect().left + "px";
-      el.style.top = pageY - shiftY - templateBox.getBoundingClientRect().top + "px";
+  <h2>Products</h2>
+  <div class="thumbnail-slider" id="productSlider"></div>
+
+  <h2>Banners</h2>
+  <div class="thumbnail-slider" id="bannerSlider"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script>
+    const templateBox = document.getElementById("templateBox");
+    const templateSlider = document.getElementById("templateSlider");
+    const productSlider = document.getElementById("productSlider");
+    const bannerSlider = document.getElementById("bannerSlider");
+
+    function makeDraggable(el) {
+      el.onmousedown = function(e) {
+        e.preventDefault();
+        let shiftX = e.clientX - el.getBoundingClientRect().left;
+        let shiftY = e.clientY - el.getBoundingClientRect().top;
+        function moveAt(pageX, pageY) {
+          el.style.left = pageX - shiftX - templateBox.getBoundingClientRect().left + "px";
+          el.style.top = pageY - shiftY - templateBox.getBoundingClientRect().top + "px";
+        }
+        function onMouseMove(e) {
+          moveAt(e.pageX, e.pageY);
+        }
+        document.addEventListener("mousemove", onMouseMove);
+        document.onmouseup = function() {
+          document.removeEventListener("mousemove", onMouseMove);
+          document.onmouseup = null;
+        };
+      };
+      el.ondragstart = function() { return false; };
     }
-    function onMouseMove(e) { moveAt(e.pageX, e.pageY); }
-    document.addEventListener("mousemove", onMouseMove);
-    document.onmouseup = function() {
-      document.removeEventListener("mousemove", onMouseMove);
-      document.onmouseup = null;
-    };
-  };
-  el.ondragstart = () => false;
-}
 
-document.getElementById("bgUpload").addEventListener("change", function(e) {
-  const file = e.target.files[0];
-  if(file) {
-    const reader = new FileReader();
-    reader.onload = ev => { templateBox.style.backgroundImage = `url(${ev.target.result})`; };
-    reader.readAsDataURL(file);
+    document.getElementById("bgUpload").addEventListener("change", function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          templateBox.style.backgroundImage = `url(${ev.target.result})`;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function applyColor() {
+      const color = document.getElementById("bgColor").value;
+      templateBox.style.backgroundImage = "";
+      templateBox.style.backgroundColor = color;
+    }
+
+    document.getElementById("logoUpload").addEventListener("change", function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          const logo = document.createElement("img");
+          logo.src = ev.target.result;
+          logo.className = "draggable";
+          logo.style.width = "150px";
+          logo.style.height = "auto";
+          logo.style.top = "20px";
+          logo.style.left = "20px";
+          templateBox.appendChild(logo);
+          makeDraggable(logo);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function addFooter() {
+      const storeNameInput = document.getElementById("footerName").value;
+      const storeNameEl = document.getElementById("storeFooterName");
+      storeNameEl.textContent = storeNameInput || "Default Store Name";
+    }
+
+    async function downloadPNG() {
+      const canvas = await html2canvas(templateBox);
+      const link = document.createElement("a");
+      link.download = "template.png";
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+
+    async function downloadPDF() {
+      const { jsPDF } = window.jspdf;
+      const canvas = await html2canvas(templateBox, { scale: 2 });
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "pt", "a4");
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      pdf.addImage(imgData, "PNG", 0, 0, pageWidth, pageHeight);
+      pdf.save("template.pdf");
+    }
+
+    // Preloaded templates
+    const preloadedTemplates = ["template1.jpg", "template2.jpg"];
+    preloadedTemplates.forEach(src => {
+      const slide = document.createElement("img");
+      slide.src = src;
+      templateSlider.appendChild(slide);
+      slide.addEventListener("click", function() {
+        templateBox.style.width = "794px";
+        templateBox.style.height = "1123px";
+        templateBox.style.margin = "0 auto";
+        templateBox.style.display = "block";
+        templateBox.style.backgroundImage = `url(${src})`;
+        templateBox.style.backgroundSize = "cover";
+        templateBox.style.backgroundPosition = "center";
+        templateBox.style.backgroundRepeat = "no-repeat";
+        Array.from(templateBox.children).forEach(child => {
+          if (child.id !== "storeFooter" && child.id !== "storeFooterName") child.remove();
+        });
+      });
+    });
+
+    // Custom template upload
+    document.getElementById("templateUpload").addEventListener("change", function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          const slide = document.createElement("div");
+          slide.className = "slide";
+          slide.innerHTML = `<img src="${ev.target.result}" alt="Custom Template">
+                             <div class="name">Custom Template</div>`;
+          slide.addEventListener("click", function() {
+            templateBox.style.width = "794px";
+            templateBox.style.height = "1123px";
+            templateBox.style.margin = "0 auto";
+            templateBox.style.display = "block";
+            templateBox.style.backgroundImage = `url(${ev.target.result})`;
+            templateBox.style.backgroundSize = "cover";
+            templateBox.style.backgroundPosition = "center";
+            templateBox.style.backgroundRepeat = "no-repeat";
+            Array.from(templateBox.children).forEach(child => {
+              if (child.id !== "storeFooter" && child.id !== "storeFooterName") child.remove();
+            });
+            if (!document.getElementById("storeFooterName")) {
+              const nameEl = document.createElement("p");
+              nameEl.id = "storeFooterName";
+              nameEl.textContent = "Default Store Name";
+              templateBox.appendChild(nameEl);
+            }
+          });
+          templateSlider.appendChild(slide);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+  <script>
+  function applyStoreNameColor() {
+    const color = document.getElementById("storeNameColor").value;
+    const storeName = document.getElementById("storeFooterName");
+    if (storeName) {
+      storeName.style.color = color;
+    }
   }
-});
-
-function applyColor() {
-  const color = document.getElementById("bgColor").value;
-  templateBox.style.backgroundImage = "";
-  templateBox.style.backgroundColor = color;
-}
-
-document.getElementById("logoUpload").addEventListener("change", function(e) {
-  const file = e.target.files[0];
-  if(file) {
-    const reader = new FileReader();
-    reader.onload = ev => {
-      const logo = document.createElement("img");
-      logo.src = ev.target.result;
-      logo.className = "draggable";
-      logo.style.width = "150px"; logo.style.height = "auto";
-      logo.style.top = "20px"; logo.style.left = "20px";
-      templateBox.appendChild(logo);
-      makeDraggable(logo);
-    };
-    reader.readAsDataURL(file);
-  }
-});
-
-async function downloadPNG() {
-  const canvas = await html2canvas(templateBox);
-  const link = document.createElement("a");
-  link.download = "template.png";
-  link.href = canvas.toDataURL();
-  link.click();
-}
-
-async function downloadPDF() {
-  const { jsPDF } = window.jspdf;
-  const canvas = await html2canvas(templateBox, { scale: 2 });
-  const imgData = canvas.toDataURL("image/png");
-  const pdf = new jsPDF("p", "pt", "a4");
-  const pageWidth = pdf.internal.pageSize.getWidth();
-  const pageHeight = pdf.internal.pageSize.getHeight();
-  pdf.addImage(imgData, "PNG", 0, 0, pageWidth, pageHeight);
-  pdf.save("template.pdf");
-}
-
-// ---------------- Footer & Color Functions ----------------
+</script>
+<script>
 function updateFooterInfo() {
   const storeNameVal = document.getElementById("footerName").value.trim() || "Store Name";
   const whatsappVal = document.getElementById("footerWhatsApp").value.trim();
-  const separator = `<span class="separator">|</span>`;
-  const contactLogo = `<span class="contact-logo">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <circle id="contactCircle" cx="12" cy="12" r="12" fill="#9A6C0C"/>
-          <path id="contactIcon" d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.48 2.53.73 3.88.73a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.25 2.67.73 3.88.12.28.07.61-.21 1.11l-2.2 2.2z" fill="white"/>
-      </svg>
-    </span>`;
+
+  // WhatsApp SVG logo with adjusted size
+  const waSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="14" height="14" style="vertical-align: middle;">
+                   <path d="M16 .7C7.6.7.7 7.6.7 16c0 2.8.7 5.6 2.1 8L.7 31.3l7.5-2.1A15.3 15.3 0 0 0 16 31.3C24.4 31.3 31.3 24.4 31.3 16S24.4.7 16 .7zM24.3 20.3c-.4-.2-2.3-1.1-2.6-1.2-.4-.1-.6-.2-.9.2-.2.4-1 1.2-1.2 1.5-.2.3-.4.3-.8.1s-1.6-.6-3.1-1.9c-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8.2-.2.4-.4.6-.6.2-.2.3-.4.4-.6.1-.2.1-.5 0-.7-.1-.2-.9-2.1-1.2-2.8-.3-.7-.6-.6-.8-.6l-.7-.02c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9 0 1.7 1.3 3.4 1.5 3.6.2.2 2.5 3.1 6 4.7 3.5 1.5 3.5 1 4.2.9.6-.1 2.1-.9 2.4-1.7.3-.9.3-1.6.2-1.8-.1-.1-.3-.2-.7-.4z"/>
+                 </svg>`;
+
+  // Thicker, taller separator |, minimal spacing
+  const separator = `<span style="font-weight:bold; font-size:18px; display:inline-block; transform:scaleY(1.3); margin:0 2px;">|</span>`;
+
+  // Update footer
+  const footerEl = document.getElementById("storeFooterName");
+  footerEl.innerHTML = `${storeNameVal}${separator}${waSvg} ${whatsappVal}`;
+}
+</script>
+<script>
+  function updateFooterInfo() {
+  const storeNameVal = document.getElementById("footerName").value.trim() || "Default Store Name";
+  const whatsappVal = document.getElementById("footerWhatsApp").value.trim();
+  const separator = `<span style="font-weight:bold; font-size:18px; margin:0 6px;">|</span>`;
+
+  // Use a span with .contact-logo class for coloring
+  const contactLogo = `<img src="/static/images/contact-logo.svg" alt="Contact Logo" class="contact-logo">`;
+  
   let footerHTML = storeNameVal;
-  if(whatsappVal) footerHTML += separator + contactLogo + whatsappVal;
+  if (whatsappVal) footerHTML += separator + contactLogo + whatsappVal;
 
   const footerEl = document.getElementById("storeFooterName");
-  if(footerEl) {
+  if (footerEl) {
+    footerEl.innerHTML = footerHTML;
+    footerEl.style.whiteSpace = "nowrap";
+    footerEl.style.display = "flex";
+    footerEl.style.alignItems = "center";
+    footerEl.style.gap = "4px";
+  }
+}
+</script>
+<script>
+  function applyCombinedColor() {
+    const color = document.getElementById("combinedColor").value;
+    
+    // Update store name text color directly.
+    const storeName = document.getElementById("storeFooterName");
+    if (storeName) {
+      storeName.style.color = color;
+    }
+    
+    // For the contact logo, use a drop-shadow filter to "tint" the image.
+    // This method works best if the original logo is monochrome (pure black).
+    const logos = document.querySelectorAll('img[alt="Contact Logo"]');
+    logos.forEach(function(logo) {
+      // The filter below converts the logo to pure black (brightness(0) saturate(100%))
+      // then applies a drop-shadow with the chosen color.
+      logo.style.filter = `brightness(0) saturate(100%) drop-shadow(0 0 0 ${color})`;
+    });
+  }
+</script>
+<script>
+function applyColors() {
+  // Store Name color
+  const storeNameColor = document.getElementById("storeNameColor").value;
+  const storeName = document.getElementById("storeFooterName");
+  if (storeName) storeName.style.color = storeNameColor;
+
+  // Contact Logo color
+  const logoColor = document.getElementById("contactLogoColor").value;
+  const logos = document.querySelectorAll('.contact-logo');
+  logos.forEach(logo => {
+    logo.style.backgroundColor = logoColor; // works live!
+  });
+}
+</script>
+<script>
+  function applyCombinedColor() {
+    // Get the chosen color from the color picker.
+    const color = document.getElementById("combinedColor").value;
+    
+    // Update the store name text color.
+    const storeName = document.getElementById("storeFooterName");
+    if (storeName) {
+      storeName.style.color = color;
+    }
+    
+    // For the contact logo, apply a CSS filter that tints the image.
+    // The drop-shadow filter here uses a small blur (3px) so that the chosen color is visible.
+    const logos = document.querySelectorAll('img[alt="Contact Logo"]');
+    logos.forEach(logo => {
+      // This filter first forces the logo to black (brightness(0) saturate(100%))
+      // then applies the tint using a drop-shadow with the chosen color.
+      logo.style.filter = `brightness(0) saturate(100%) drop-shadow(0 0 3px ${color})`;
+    });
+  }
+</script>
+<script>
+function updateFooterInfo() {
+  const storeNameVal = document.getElementById("footerName").value.trim() || "Store Name";
+  const whatsappVal = document.getElementById("footerWhatsApp").value.trim();
+
+  // Separator and contact logo
+  const separator = `<span class="separator">|</span>`;
+  const contactLogo =`<img src="/static/images/contact-logo.svg" alt="Contact Logo" class="contact-logo">`;
+  
+
+  // Footer content
+  let footerHTML = storeNameVal;
+  if (whatsappVal) footerHTML += separator + contactLogo + whatsappVal;
+
+  const footerEl = document.getElementById("storeFooterName");
+  if (footerEl) {
     footerEl.innerHTML = footerHTML;
     footerEl.style.display = "flex";
     footerEl.style.alignItems = "center";
-    footerEl.style.gap = "2px";
+    footerEl.style.gap = "2px";      // minimal spacing
     footerEl.style.whiteSpace = "nowrap";
   }
-  adjustFooterFontSize();
-  adjustFooterPosition();
 }
-
-function applyColors() {
-  const storeNameColor = document.getElementById("storeNameColor").value;
-  const storeName = document.getElementById("storeFooterName");
-  if(storeName) storeName.style.color = storeNameColor;
-
-  const logoColor = document.getElementById("contactLogoColor").value;
-  document.querySelectorAll('#contactCircle').forEach(c => c.setAttribute('fill', logoColor));
-  document.querySelectorAll('#contactIcon').forEach(p => p.setAttribute('fill', '#fff'));
-}
-
-function applyCombinedColor() {
-  const color = document.getElementById("combinedColor").value;
-  const storeName = document.getElementById("storeFooterName");
-  if(storeName) storeName.style.color = color;
-  document.querySelectorAll('#contactCircle').forEach(c => c.setAttribute('fill', color));
-}
-
-// ---------------- Footer Font & Position ----------------
+</script>
+<script>
+// Auto-adjust footer font size based on text length + logo + separator
 function adjustFooterFontSize() {
+  const footer = document.getElementById("storeFooterName");
+  if (!footer) return;
+
+  // Base text length
+  let textLength = footer.innerText.length;
+
+  // Add 10 chars for each logo inside footer
+  const logoCount = footer.querySelectorAll("img").length;
+  textLength += logoCount * 10;
+
+  // Add 1 char for each "|" separator
+  const separatorCount = (footer.innerHTML.match(/\|/g) || []).length;
+  textLength += separatorCount;
+
+  // Font size rules
+  if (textLength <= 88) {
+    footer.style.fontSize = "15px";   // large font for short
+  } else if (textLength <= 128) {
+    footer.style.fontSize = "11px";   // medium font
+  } else {
+    footer.style.fontSize = "11px";   // small font for long
+  }
+}
+
+// Re-run font adjustment whenever footer updates
+const originalUpdateFooterInfo = window.updateFooterInfo || function(){};
+window.updateFooterInfo = function() {
+  originalUpdateFooterInfo();  
+  adjustFooterFontSize();     
+};
+
+// Run on first load also
+window.addEventListener("load", adjustFooterFontSize);
+</script>
+<script>
+oterEl = clone.querySelector("#storeFooterName");
+
+
+window.addEventListener("load", () => {
+  fetch("/static/storeaddress.json")
+    .then(response => response.json())
+    .then(data => {
+      const templateContainer = document.getElementById("templatesContainer");
+      const originalTemplate = document.getElementById("templateBox");
+      if (!originalTemplate) return;
+
+      templateContainer.innerHTML = "";
+      data.forEach(store => {
+        const clone = originalTemplate.cloneNode(true);
+        const footerEl = clone.querySelector("#storeFooterName");
+        if (footerEl) {
+          footerEl.innerHTML = `
+            <span class="store-address">${store.address}</span>
+            <span class="separator">|</span>
+           
+              <img src="images/contact-logo.svg" alt="Contact Logo" class="contact-logo">
+          <span class="store-mobile">${store.mobile_number}</span>;
+
+          
+ 
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#000" viewBox="0 0 24 24">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 
+             10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 
+             8-8 8 3.59 8 8-3.59 8-8 8z"/>
+  </svg>
+</span>
+            <span class="store-mobile">${store.mobile_number}</span>
+          `;
+        }
+        templateContainer.appendChild(clone);
+      });
+
+      // ✅ Move footer after clone creation
+      // adjustFooterAppearance();
+      adjustFooterPosition();
+    
+    })
+    .catch(console.error);
+});
+</script>
+<script>
+  // Assume preloadedTemplates is defined as an array of image file names.
+  preloadedTemplates.forEach(src => {
+    const slide = document.createElement("img");
+    slide.src = src;
+    templateSlider.appendChild(slide);
+    slide.addEventListener("click", function() {
+      // Select all elements with the class "template-box"
+      const boxes = document.querySelectorAll(".template-box");
+      boxes.forEach(box => {
+         box.style.width = "794px";      // Fixed A4 width
+         box.style.height = "1123px";      // Fixed A4 height
+         box.style.margin = "0 auto";
+         box.style.display = "block";
+         box.style.backgroundImage = `url(${src})`;
+         box.style.backgroundSize = "cover";
+         box.style.backgroundPosition = "center";
+         box.style.backgroundRepeat = "no-repeat";
+         // Optionally, remove any children that are not needed.
+         Array.from(box.children).forEach(child => {
+           if (child.id !== "storeFooter" && child.id !== "storeFooterName") {
+             child.remove();
+           }
+         });
+      });
+    });
+  });
+</script>
+<script>
+  document.getElementById("templateUpload").addEventListener("change", function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        // Get all template boxes
+        const allTemplateBoxes = document.querySelectorAll(".template-box");
+        allTemplateBoxes.forEach(function(box) {
+          // Set A4 dimensions and basic styling
+          box.style.width = "794px";
+          box.style.height = "1123px";
+          box.style.margin = "0 auto";
+          box.style.display = "block";
+          // Set the custom template background image
+          box.style.backgroundImage = `url(${ev.target.result})`;
+          box.style.backgroundSize = "cover";
+          box.style.backgroundPosition = "center";
+          box.style.backgroundRepeat = "no-repeat";
+          // Optionally, remove any children elements that are not part of your footer
+          Array.from(box.children).forEach(child => {
+            if (child.id !== "storeFooter" && child.id !== "storeFooterName") {
+              child.remove();
+            }
+          });
+          // If no store footer name exists, create one (if desired)
+          if (!box.querySelector("#storeFooterName")) {
+            const nameEl = document.createElement("p");
+            nameEl.id = "storeFooterName";
+            nameEl.textContent = "Default Store Name";
+            box.appendChild(nameEl);
+          }
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
+<script>
+  window.addEventListener("load", () => {
+    fetch("/static/storeaddress.json")
+      .then(response => response.json())
+      .then(data => {
+        const templateContainer = document.getElementById("templatesContainer");
+        const originalTemplate = document.getElementById("templateBox");
+        if (!originalTemplate) {
+          console.error("Original template with id 'templateBox' not found.");
+          return;
+        }
+        templateContainer.innerHTML = "";
+        data.forEach(store => {
+          const clone = originalTemplate.cloneNode(true);
+          const footerEl = clone.querySelector("#storeFooterName");
+          if (footerEl) {
+            footerEl.innerHTML = `
+              <span class="store-address">${store.address}</span>
+              <span class="separator">|</span>
+        
+              <img src="/static/images/contact-logo.svg" alt="Contact Logo" class="contact-logo">
+              <span class="store-mobile">${store.mobile_number}</span>
+            `;
+            footerEl.style.display = "flex";
+            footerEl.style.alignItems = "center";
+            footerEl.style.gap = "2px";
+            footerEl.style.whiteSpace = "nowrap";
+          }
+          templateContainer.appendChild(clone);
+        });
+        // adjustFooterAppearance();
+        adjustFooterPosition();
+     
+        // shiftLongAddress(); // Adjust addresses after appending clones
+      })
+      .catch(error => console.error("Error fetching storeaddress.json:", error));
+  });
+</script>
+<script>
+  function adjustFooterFontSize() {
+    // Select all footer elements assigned (each clone gets a #storeFooterName);
+    // In a strict HTML scenario, IDs should be unique, so if needed use a class instead.
+    const footers = document.querySelectorAll("#storeFooterName");
+    footers.forEach(footer => {
+      // Get the plain text length (remove any extra whitespace)
+      const textLength = footer.textContent.trim().length;
+      let newFontSize;
+      // Adjust font size based on the length
+      if (textLength < 88) {
+        newFontSize = "15px";   // Larger font for short text
+      } else if (textLength <= 128) {
+        newFontSize = "18px";   // Medium font size
+      } else {
+        newFontSize = "11px";  // Smaller font for long text
+      }
+      footer.style.fontSize = newFontSize;
+    });
+  }
+
+  // Call adjustFooterFontSize after you update the footer in the JSON fetch block
+  window.addEventListener("load", () => {
+    fetch("/static/storeaddress.json")
+      .then(response => response.json())
+      .then(data => {
+        const templateContainer = document.getElementById("templatesContainer");
+        const originalTemplate = document.getElementById("templateBox");
+        if (!originalTemplate) {
+          console.error("Original template with id 'templateBox' not found.");
+          return;
+        }
+        templateContainer.innerHTML = "";
+        data.forEach(store => {
+          const clone = originalTemplate.cloneNode(true); // deep clone
+          const footerEl = clone.querySelector("#storeFooterName");
+          if (footerEl) {
+            footerEl.innerHTML = `
+              ${store.address} 
+              <span class="separator">|</span> 
+              <span class="contact-logo"></span> 
+              <span>${store.mobile_number}</span>
+            `;
+            footerEl.style.display = "flex";
+            footerEl.style.alignItems = "center";
+            footerEl.style.gap = "2px";
+            footerEl.style.whiteSpace = "nowrap";
+          }
+          templateContainer.appendChild(clone);
+        });
+        // Now adjust the font size on all footers
+        adjustFooterPosition();
+        // adjustFooterAppearance();
+        adjustFooterFontSize();
+     
+      })
+      .catch(error => console.error("Error fetching storeaddress.json:", error));
+  });
+</script>
+<script>
+function adjustFooterFontAndPosition() {
   const footers = document.querySelectorAll("#storeFooterName");
   footers.forEach(footer => {
-    let textLength = footer.innerText.trim().length;
-    textLength += footer.querySelectorAll(".contact-logo").length * 10;
-    textLength += (footer.innerHTML.match(/\|/g) || []).length;
-    footer.style.fontSize = textLength <= 88 ? "15px" : "11px";
+    const textLength = footer.innerText.trim().length;
+
+    // Adjust font size
+    if (textLength <= 88) {
+      footer.style.fontSize = "15px";   // large font for short
+    } else if (textLength <= 128) {
+      footer.style.fontSize = "11px";   // medium font
+    } else {
+      footer.style.fontSize = "11px";  // small font for long
+    }
+
+    // Shift upward if too long
+    if (textLength > 128) {
+      footer.style.bottom = "50px";     // shift upward
+    } else {
+      footer.style.bottom = "30px";     // default
+    }
   });
 }
-
+</script>
+<script>
 function adjustFooterPosition() {
   const footers = document.querySelectorAll("#storeFooterName");
   footers.forEach(footer => {
     const textLength = footer.textContent.trim().length;
+    // Move slightly upward for long text
     footer.style.bottom = textLength > 128 ? "40px" : "30px";
   });
 }
 
-// ---------------- Template Upload ----------------
-document.getElementById("templateUpload").addEventListener("change", function(e) {
-  const file = e.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    const slide = document.createElement("div");
-    slide.className = "slide";
-    slide.innerHTML = `<img src="${ev.target.result}" alt="Custom Template"><div class="name">Custom Template</div>`;
-    slide.addEventListener("click", () => {
-      templateBox.style.width = "794px";
-      templateBox.style.height = "1123px";
-      templateBox.style.margin = "0 auto";
-      templateBox.style.display = "block";
-      templateBox.style.backgroundImage = `url(${ev.target.result})`;
-      templateBox.style.backgroundSize = "cover";
-      templateBox.style.backgroundPosition = "center";
-      templateBox.style.backgroundRepeat = "no-repeat";
-      Array.from(templateBox.children).forEach(child => {
-        if(child.id !== "storeFooter" && child.id !== "storeFooterName") child.remove();
-      });
-      if(!document.getElementById("storeFooterName")) {
-        const nameEl = document.createElement("p");
-        nameEl.id = "storeFooterName";
-        nameEl.textContent = "Default Store Name";
-        templateBox.appendChild(nameEl);
-      }
-    });
-    templateSlider.appendChild(slide);
+window.addEventListener("load", adjustFooterPosition);
 
-    const allBoxes = document.querySelectorAll(".template-box");
-    allBoxes.forEach(box => {
-      box.style.width = "794px";
-      box.style.height = "1123px";
-      box.style.margin = "0 auto";
-      box.style.display = "block";
-      box.style.backgroundImage = `url(${ev.target.result})`;
-      box.style.backgroundSize = "cover";
-      box.style.backgroundPosition = "center";
-      box.style.backgroundRepeat = "no-repeat";
-      Array.from(box.children).forEach(child => {
-        if(child.id !== "storeFooter" && child.id !== "storeFooterName") child.remove();
-      });
-      if(!box.querySelector("#storeFooterName")) {
-        const nameEl = document.createElement("p");
-        nameEl.id = "storeFooterName";
-        nameEl.textContent = "Default Store Name";
-        box.appendChild(nameEl);
-      }
-    });
-  };
-  reader.readAsDataURL(file);
-});
-
-// ---------------- Preloaded Templates ----------------
-const preloadedTemplates = ["template1.jpg","template2.jpg"];
-preloadedTemplates.forEach(src => {
-  const slide = document.createElement("img");
-  slide.src = src;
-  templateSlider.appendChild(slide);
-  slide.addEventListener("click", () => {
-    const boxes = document.querySelectorAll(".template-box");
-    boxes.forEach(box => {
-      box.style.width = "794px";
-      box.style.height = "1123px";
-      box.style.margin = "0 auto";
-      box.style.display = "block";
-      box.style.backgroundImage = `url(${src})`;
-      box.style.backgroundSize = "cover";
-      box.style.backgroundPosition = "center";
-      box.style.backgroundRepeat = "no-repeat";
-      Array.from(box.children).forEach(child => {
-        if(child.id !== "storeFooter" && child.id !== "storeFooterName") child.remove();
-      });
-    });
-  });
-});
-
-// ---------------- Clone Templates from JSON ----------------
-window.addEventListener("load", () => {
-  fetch("/static/storeaddress.json")
-    .then(resp => resp.json())
-    .then(data => {
-      const container = document.getElementById("templatesContainer");
-      const original = document.getElementById("templateBox");
-      if(!original) return;
-      container.innerHTML = "";
-      data.forEach(store => {
-        const clone = original.cloneNode(true);
-        const footerEl = clone.querySelector("#storeFooterName");
-        if(footerEl) {
-          footerEl.innerHTML = `
-            <span class="store-address">${store.address}</span>
-            <span class="separator">|</span>
-            <span class="contact-logo">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <circle id="contactCircle" cx="12" cy="12" r="12" fill="#9A6C0C"/>
-                    <path id="contactIcon" d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.48 2.53.73 3.88.73a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.25 2.67.73 3.88.12.28.07.61-.21 1.11l-2.2 2.2z" fill="white"/>
-                </svg>
-            </span>
-            <span class="store-mobile">${store.mobile_number}</span>
-          `;
-          footerEl.style.display = "flex";
-          footerEl.style.alignItems = "center";
-          footerEl.style.gap = "2px";
-          footerEl.style.whiteSpace = "nowrap";
-        }
-        container.appendChild(clone);
-      });
-      adjustFooterPosition();
-      adjustFooterFontSize();
-    })
-    .catch(err => console.error(err));
-});
-
-// ---------------- Download Each Template as A4 PDF ----------------
+const oldUpdateFooterInfo = window.updateFooterInfo || function() {};
+window.updateFooterInfo = function() {
+  oldUpdateFooterInfo();
+  adjustFooterPosition();
+};
+</script>
+// ✅ A4 download functionality for a particular template
+<script>
+  // ✅ Download each template as a separate A4 PDF file
 async function downloadEachTemplateA4() {
+  // Select all templates, including the original one
   const templates = document.querySelectorAll(".template-box");
-  if(!templates.length) { alert("No templates found!"); return; }
+  if (!templates.length) {
+    alert("No templates found!");
+    return;
+  }
 
-  for(let i=0; i<templates.length; i++) {
-    const canvas = await html2canvas(templates[i], { scale: 2 });
+  for (let i = 0; i < templates.length; i++) {
+    const element = templates[i];
+
+    // Use html2canvas to capture the template
+    const canvas = await html2canvas(element, { scale: 2 });
     const imgData = canvas.toDataURL("image/png");
-    const pdf = new jspdf.jsPDF("p","mm","a4");
-    const pdfWidth = 210, pdfHeight = 297;
+
+    // Create an A4 PDF
+    const pdf = new jspdf.jsPDF("p", "mm", "a4");
+    const pdfWidth = 210;  // A4 width in mm
+    const pdfHeight = 297; // A4 height in mm
     const imgWidth = pdfWidth;
     const imgHeight = (canvas.height * pdfWidth) / canvas.width;
-    const yOffset = imgHeight < pdfHeight ? (pdfHeight - imgHeight)/2 : 0;
-    pdf.addImage(imgData,"PNG",0,yOffset,imgWidth,imgHeight);
-    pdf.save(`template_${i+1}.pdf`);
-    await new Promise(r => setTimeout(r,400));
+
+    // Center vertically if image shorter than A4
+    const yOffset = imgHeight < pdfHeight ? (pdfHeight - imgHeight) / 2 : 0;
+
+    pdf.addImage(imgData, "PNG", 0, yOffset, imgWidth, imgHeight);
+    pdf.save(`template_${i + 1}.pdf`);
+
+    // Add slight delay between downloads
+    await new Promise(resolve => setTimeout(resolve, 400));
   }
+
   alert("✅ All templates downloaded successfully!");
 }
 </script>
+</script>
 </body>
 </html>
+
